@@ -1,0 +1,249 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /api/cars/:
+    get:
+      operationId: listCars
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Car'
+          description: ''
+      tags:
+      - api
+  /api/cars/{id}/:
+    get:
+      operationId: retrieveCar
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u041C\u0430\u0448\u0438\
+          \u043D\u0430."
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Car'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateCar
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u041C\u0430\u0448\u0438\
+          \u043D\u0430."
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Car'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Car'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Car'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Car'
+          description: ''
+      tags:
+      - api
+  /api/cargo/:
+    get:
+      operationId: listCargos
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CargoList'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createCargo
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CargoDetail'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CargoDetail'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CargoDetail'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CargoDetail'
+          description: ''
+      tags:
+      - api
+  /api/cargo/{id}/:
+    get:
+      operationId: retrieveCargo
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u0413\u0440\u0443\u0437\
+          ."
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CargoDetail'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateCargo
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u0413\u0440\u0443\u0437\
+          ."
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CargoDetail'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CargoDetail'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CargoDetail'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CargoDetail'
+          description: ''
+      tags:
+      - api
+    delete:
+      operationId: destroyCargo
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u0413\u0440\u0443\u0437\
+          ."
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api
+components:
+  schemas:
+    Car:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        current_location:
+          type: string
+        car_number:
+          type: string
+          maxLength: 5
+        load_capacity:
+          type: number
+          maximum: 1000
+          minimum: 1
+      required:
+      - current_location
+      - load_capacity
+    CargoList:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        pick_up_location:
+          type: string
+        delivery_location:
+          type: string
+        quantity_of_nearby_cars:
+          type: string
+          readOnly: true
+        weight:
+          type: number
+          maximum: 1000
+          minimum: 1
+        description:
+          type: string
+      required:
+      - pick_up_location
+      - delivery_location
+      - weight
+      - description
+    CargoDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        pick_up_location:
+          type: string
+        delivery_location:
+          type: string
+        nearby_cars:
+          type: string
+          readOnly: true
+        weight:
+          type: number
+          maximum: 1000
+          minimum: 1
+        description:
+          type: string
+      required:
+      - pick_up_location
+      - delivery_location
+      - weight
+      - description
