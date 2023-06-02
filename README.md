@@ -10,7 +10,3 @@ REST API сервиc для поиска ближайших машин к гру
 - Nginx
 - Docker
 - Postgres
-
-
-## Автор backend'а:
-Петр Анреев (c) 2022
